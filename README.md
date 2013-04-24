@@ -6,7 +6,7 @@ Note : All scripts are compatible with the dash and bash shell on your host syst
        Adjust the 'downloadIP' in the 'waether.conf' file and you can start.
        I use the Ubuntu LTS 12.04.
 
-# Features:
+## Features:
 
 - Doesn't need any crontab usage
 
