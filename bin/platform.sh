@@ -93,7 +93,7 @@ isWlanAvailable_onKindle () {
 
 	# lipc-get-prop com.lab126.wifid profileCount
 	# echo "{index = (0)}" | lipc-hash-prop com.lab126.wifid profileData
-	# echo "{index = (0)}" | lipc-hash-prop -n com.lab126.wifid currentEssid
+	# echo lipc-hash-prop -n com.lab126.wifid currentEssid
 
 	# lipc-get-prop com.lab126.powerd isCharging
 	# lipc-get-prop com.lab126.powerd state

@@ -38,8 +38,7 @@ It contains the following 2 lines:
 
 Good luck!
 
-
-## Partial directory structure on your SD card
+## Partial directory structure on your Kindle internal SD card
 
 ```
 /mnt/us
@@ -47,8 +46,7 @@ Good luck!
 ├── kite
 │   ├── onboot
 │   ├── ondrop
-│   └── Weather   #!/bin/sh
-│                 /mnt/us/weather/launcher.sh &
+│   └── Weather
 │
 └── weather
     ├── bin
