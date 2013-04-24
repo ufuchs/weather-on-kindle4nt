@@ -2,7 +2,7 @@
 
 #
 # Copyright (c) 2013 Uli Fuchs <ufuchs@gmx.com>
-# Released under the terms of the GNU GPL v2.0.
+# Released under the terms of the MIT License
 #
 
 #

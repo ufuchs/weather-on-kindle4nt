@@ -1,6 +1,11 @@
 #!/bin/sh
 
 #
+# Copyright (c) 2012 Uli Fuchs <ufuchs@gmx.com>
+# Released under the terms of the MIT License
+#
+
+#
 # used properties
 #
 KEY_CITY="city"
