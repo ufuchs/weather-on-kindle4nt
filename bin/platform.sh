@@ -70,6 +70,9 @@ isWlanAvailable_onHost () {
 	echo 1    # on host platform always switched on
 }
 
+#
+# example, not in use
+#
 check_wireless_connected()
 {
 	for i in `seq 3` ; do
@@ -84,23 +87,16 @@ check_wireless_connected()
 }
 
 #
-#
+# @see mmcblk0p1/test/unit_tests/common.sh
 #
 isWlanAvailable_onKindle () {
 
-	# /home/ufuchs/workspace/OFFICIAL-H2-Yoshi/kindle-backup/mmcblk0p1/test/unit_tests/common.sh
-
 	# lipc-get-prop com.lab126.wifid profileCount
 	# echo "{index = (0)}" | lipc-hash-prop com.lab126.wifid profileData
+	# echo "{index = (0)}" | lipc-hash-prop -n com.lab126.wifid currentEssid
 
 	# lipc-get-prop com.lab126.powerd isCharging
-	# lipc-set-prop -i com.lab126.powerd preventScreenSaver 1
 	# lipc-get-prop com.lab126.powerd state
-
-	# echo "{index = (0)}" | lipc-hash-prop -n com.lab126.wifid currentEssid
-	# lipc-get-prop com.lab126.wifid cmState
-
-    # lipc-get-prop com.lab126.cmd activeInterface
 
 	[  "$(cat /sys/class/net/wlan0/operstate)" == "up" ] && {
 		echo 1  # operstate == up
@@ -213,7 +209,7 @@ isAR6003Loaded () {
 }
 
 #
-#
+# @param $1 suspend time in seconds
 #
 waitBySuspend_onKindle () {
 
@@ -240,14 +236,14 @@ waitBySuspend_onKindle () {
 }
 
 #
-#
+# @param $1 suspend time in seconds
 #
 waitBySleep_onHost () {
 	sleep "$1"
 }
 
 #
-#
+# @param $1 suspend time in seconds
 #
 waitBySleep_onKindle () {
 	lipc-set-prop com.lab126.wifid enable 0
@@ -278,18 +274,6 @@ isAeroplaneModeOn () {
 isWlanAvailable () {
 	isWlanAvailable_"$PLATFORM"
 }
-
-# checks the availability of a weather file on server.
-# this function doesn't provide any information if this weather file is 
-# outdated or not!  
-#
-# @param1 string url  download url to the weatherfile
-# @return integer   1, a weather file is available on server
-#                   0, the weather file doesn't exist  
-#
-#isServiceAvailable () {
-#	isServiceAvailable_"$PLATFORM" "$1"
-#}
 
 #
 #

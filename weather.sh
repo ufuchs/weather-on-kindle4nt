@@ -23,13 +23,11 @@ SYNCHRONIZE=1
 
 FLIGHTMODE_ON=1
 WLAN_UNAVAILABLE=2
-SERVER_UNAVAILABLE=4
 SERVICE_UNAVAILABLE=8
 WEATHER_OUTDATED=16
 
 FLIGHTMODE_ON_PNG="$BASE/img/flightmode-on.png"
 WLAN_UNAVAILABLE_PNG="$BASE/img/wlan-unavailable.png"
-SERVER_UNAVAILABLE_PNG="$BASE/img/server-unavailable.png"
 SERVICE_UNAVAILABLE_PNG="$BASE/img/service-unavailable.png"
 WEATHER_OUTDATED_PNG="$BASE/img/weather-outdated.png"
 
@@ -64,19 +62,6 @@ isWeatherFileOutDated () {
 
 }
 
-#
-#
-#
-getUpdateIntervall () {
-set +x
-    local res
-
-    res=$(calcUpdateIntervall)
-
-set -x
-
-    echo $res
-}
 
 #
 # calculate the next possible update interval to be at time at 00:10 o'clock
@@ -112,20 +97,6 @@ calcUpdateIntervall () {
     }
 
     echo $res
-
-}
-
-#
-# checks if a connection to the download server is possible
-#
-# @return the result of invoking a 'ping' against the download server
-#
-isServerAvailable () {
-
-    local server_ip=${DOWNLOAD_IP%%:*}
-
-    ping -c 1 "$server_ip" > /dev/null
-    echo $?
 
 }
 
@@ -181,10 +152,6 @@ checkPrerequests () {
         res=$WLAN_UNAVAILABLE
     }
 
-#    [ $(isServerAvailable) -ne 0 ] && {
-#        res=$SERVER_UNAVAILABLE
-#    }
-
     [ $(isServiceAvailable "$URL") -ne 0 ] && {
         res=$SERVICE_UNAVAILABLE
     }
@@ -206,9 +173,6 @@ errCodeToImgFilename () {
             ;;
         $WLAN_UNAVAILABLE )
             echo "$WLAN_UNAVAILABLE_PNG"
-            ;;
-        $SERVER_UNAVAILABLE )
-            echo "$SERVER_UNAVAILABLE_PNG"
             ;;
         $SERVICE_UNAVAILABLE )
             echo "$SERVICE_UNAVAILABLE_PNG"
@@ -233,10 +197,10 @@ printInfoScreen () {
 #
 init () {
 
+
     weatherProperties_init "$BASE/weather.conf"
 
     # Location aus conf-File wandeln
-#    URL="http://$DOWNLOAD_IP/Germany-Berlin/$WEATHER_FILE_NAME"
     URL="http://$DOWNLOAD_IP"
 
     mkdir -p "$WEATHER_FILE_DIR" > /dev/null
@@ -271,9 +235,9 @@ while :; do
 
         # read env
         $START )
-            set +x
+
             init
-            set -x
+
             STATE=$CHECK_PRE
             ;;
 
@@ -307,7 +271,7 @@ while :; do
                 STATE=$PRINTSCREEN           # weather file still valid
             } || {
                 printInfoScreen $WEATHER_OUTDATED
-                sec=$(calcUpdateIntervall) #$(getUpdateIntervall)
+                sec=$(calcUpdateIntervall)
                 STATE=$WAIT
             }
             ;;
@@ -326,7 +290,7 @@ while :; do
         $PRINTSCREEN )
             printScreen "$WEATHER_FILE"
 #            sleep 2
-            sec=$(calcUpdateIntervall) #$(getUpdateIntervall)
+            sec=$(calcUpdateIntervall)
             [ "$INDICATORS" -gt 0 ] && {
                 printBatteryIndicator
 #                printWlanIndicator

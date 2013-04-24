@@ -64,8 +64,6 @@ launch_onKindle () {
 
 	local activeInterface=`lipc-get-prop com.lab126.cmd activeInterface` # if not connected to wifi fail the test
 
-#	/etc/init.d/powerd stop
-
 	lipc-set-prop -i com.lab126.powerd preventScreenSaver 1
 
 	killall -STOP cvm
@@ -78,9 +76,10 @@ launch_onKindle () {
 
 	killtree "$wpid" "KILL"
 
-	# reanimate the stopped processes
+	# resume
+	
 	killall -CONT cvm
-#	/etc/init.d/powerd start
+
 	
 	if [ "$activeInterface" == "wifi" ]; then
 
