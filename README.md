@@ -12,4 +12,10 @@ Features:
 
 - Could invoke within a wrapper called 'launcher.sh'
 
+- The download is written in the '/tmp' directory which is a temporary filesystem, living in the memory
+
+Installation:
+
+Copy this directory onto your Kindle's SD card.
+
 
