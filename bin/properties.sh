@@ -3,13 +3,7 @@
 # Released under the terms of the GNU GPL v2.0.
 #
 
-KEY_NOT_FOUND=100
-
 PROPERTIES='properties'
-KEYSET='keyset'
-
-#declare -a PROPERTIES
-#declare -a KEYSET
 
 #
 # Gets the key name of a key/value pair
@@ -28,37 +22,6 @@ getValue () {
 }
 
 #
-# checks if a list of keys contains a particular key
-# @param $1	list of keys
-# @param $2	key in question
-# @return	true if list contains the key in question
-#
-containsKey () {
-  
-  local keys="$1"
-  local keyInQuestion="$2"
-  local found=0
-
-  local i=0
-  local count=$(echo $(eval echo \$$keys${i}))
-                                     # fetch the number of lines
-  i=1
-  while [ $i -le $count ]; do
-
-    [ "$keyInQuestion" = "$(eval echo \$$keys${i})" ] && {
-      found=1
-      break
-    }
-
-    i=$((i+1))
-
-  done
-
-  echo "$found"
-
-}
-
-#
 # Gets the value of a property by a given key
 # @param $1	key name of the property
 # @return	value of the property
@@ -66,11 +29,12 @@ getPropertyValue ()
 {
 
   local i=0
-  local count=$(eval echo \$$PROPERTIES${i})
-                                     # fetch the number of lines
+  local propCount=$(eval echo \$$PROPERTIES${i})
+                                     #  fetch the number of lines.
+                                     #  be aware to substitute 'i' with 0
   local property
-  i=1
-  while [ $i -le $count ]; do
+  i = 0
+  while [ $i -le $propCount ]; do
 
     property=$(eval echo \$$PROPERTIES${i})
 
@@ -86,7 +50,7 @@ getPropertyValue ()
 }
 
 # 
-# Loads the content from PROPERTY_FILENAME into an array named 'PROPERTIES'.
+# Loads the content from a property file into an array named 'PROPERTIES'.
 # An element in the array represents a single line from the property file.
 # In the form 'KEY=VALUE
 #
@@ -98,7 +62,7 @@ loadProperties ()
   #  background:
   #  if you forgot to press ENTER on the last line of the conf script
   #+ you will get an empty value later.
-#  sed -i -e '$a\' "$1"
+  #  sed -i -e '$a\' "$1"
 
   local is="$1"
 
@@ -121,25 +85,8 @@ loadProperties ()
     i=$((i + 1))
 
   done < "$is"                       # the input comes from here...
+
   eval ${PROPERTIES}0="'$((i - 1))'"
-                                     # write the number of lines
-
-  # populate the KEYSET
-  i=0
-  local count=$(eval echo \$$PROPERTIES${i})
-                                     # fetch the number of lines
-  local property
-  i=1
-  while [ $i -le $count ]; do
-
-    property=$(eval echo \$$PROPERTIES${i})
-
-    eval ${KEYSET}${i}="'$(getKey "$property")'"
-
-    i=$((i+1))
-
-  done
-  eval ${KEYSET}0="'$((i - 1))'"
                                      # write the number of lines
 
 }
