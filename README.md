@@ -31,14 +31,17 @@ In the Kite directory lives a shell script called 'Weather'.
 
 It contains the following 2 lines:
 
+```bash
 #!/bin/sh
 /mnt/us/weather/launcher.sh &
+```
 
 Good luck!
 
 
 Partial directory structure on your SD card:
 
+```
 /mnt/us
 │
 ├── kite
@@ -60,3 +63,4 @@ Partial directory structure on your SD card:
     ├── launcher.sh
     ├── weather.conf
     └── weather.sh
+```
