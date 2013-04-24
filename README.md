@@ -17,7 +17,7 @@ Note : All scripts are compatible with the dash and bash shell on your host syst
 
 - The download is written in the '/tmp' directory which is a temporary filesystem, living in the memory
 
-# Installation:
+## Installation:
 
 Copy this directory onto your Kindle's SD card and rename it to 'weather'.
 
@@ -39,7 +39,7 @@ It contains the following 2 lines:
 Good luck!
 
 
-# Partial directory structure on your SD card:
+## Partial directory structure on your SD card:
 
 ```
 /mnt/us
