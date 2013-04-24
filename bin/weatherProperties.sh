@@ -8,37 +8,16 @@
 #
 # used properties
 #
-KEY_CITY="city"
-KEY_COORDINATES="coordinates"
 KEY_DOWNLOAD_IP="downloadIP"
 KEY_UPDATE_INTERVAL="updateInterval"
 KEY_INDICATORS="indicators"
 KEY_WAITSTRATEGY="waitStrategy"
 
-mandatoryKeys="\
-	$KEY_CITY \
-	$KEY_DOWNLOAD_IP
-	$KEY_UPDATE_INTERVAL \
-	$KEY_INDICATORS \
-	$KEY_WAITSTRATEGY \
-"
-
-allKeys="\
-	$KEY_CITY \
-	$KEY_COORDINATES \
-	$KEY_UPDATE_INTERVAL \
-	$KEY_INDICATORS \  
-	$KEY_WAITSTRATEGY \
-"
-
-# your city/location on earth
-CITY=
-# geographic coordinates of your city/location
-COORDINATES=
-# update interval for new weather queries
-UPDATE_INTERVAL=
 # server IP for download the weatherfile
 DOWNLOAD_IP=
+
+# update interval in seconds
+UPDATE_INTERVAL=
 
 #  debug flag  0, no debug output
 #              1, prints battery capacity and current into the
@@ -77,8 +56,6 @@ weatherProperties_init () {
 
 	loadProperties "$1"
 
-	CITY=$(getPropertyValue "$KEY_CITY")
-	COORDINATES=$(getPropertyValue "$KEY_COORDINATES")
 	DOWNLOAD_IP=$(getPropertyValue "$KEY_DOWNLOAD_IP")
 
 	local updateInterval=$(getPropertyValue "$KEY_UPDATE_INTERVAL")

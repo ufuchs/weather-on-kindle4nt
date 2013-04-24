@@ -33,7 +33,7 @@ getPropertyValue ()
                                      #  fetch the number of lines.
                                      #  be aware to substitute 'i' with 0
   local property
-  i = 0
+  i=1
   while [ $i -le $propCount ]; do
 
     property=$(eval echo \$$PROPERTIES${i})
