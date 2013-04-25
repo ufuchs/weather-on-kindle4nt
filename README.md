@@ -3,7 +3,8 @@ weather-on-kindle4nt
 
 Note : All scripts are compatible with the dash and bash shell on your host system.
        Output will be written in the '/tmp' directory.
-       Adjust the 'downloadIP' in the 'waether.conf' file and you can start.
+       Adjust the 'downloadIP' in the 'waether.conf' file and invoke './launcher.sh'.
+       To leave the launcher hit ENTER.
        I use the Ubuntu LTS 12.04.
 
 ## Features
