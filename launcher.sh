@@ -7,6 +7,8 @@
 
 set -x
 
+ACTIVE=/tmp/WEATHER_ACTIVE
+
 cd "$(dirname "$0")"
 
 #
@@ -62,6 +64,10 @@ launch_onHost () {
 #
 launch_onKindle () {
 
+	[ -f $WEATHER_ACTIVE ] && exit
+
+	touch $WEATHER_ACTIVE
+
 	local activeInterface=`lipc-get-prop com.lab126.cmd activeInterface` # if not connected to wifi fail the test
 
 	lipc-set-prop -i com.lab126.powerd preventScreenSaver 1
@@ -73,6 +79,7 @@ launch_onKindle () {
 	wpid=$(pgrep weather.sh)
 
 	waitforkey
+				# if anybody press ENTER the rest will fail...
 
 	killtree "$wpid" "KILL"
 
@@ -95,6 +102,8 @@ launch_onKindle () {
 
 	# pressing the 'Home' button
 	echo "send 101" > /proc/keypad
+
+	rm $WEATHER_ACTIVE
 
 }
 
