@@ -28,6 +28,12 @@ Kite is available at:
 
   http://www.mobileread.com/forums/showpost.php?p=2373962&postcount=43
 
+And please have a next look at:
+
+  http://www.mobileread.com/forums/showpost.php?p=2205271&postcount=62
+
+(2013-APR-25 At the moment I'm encountering a problem to start 'Kite' with the given runlevel... Be aware!)
+
 In the Kite directory lives a shell script called 'Weather'.
 
 It contains the following 2 lines:
