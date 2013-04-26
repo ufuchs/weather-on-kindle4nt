@@ -8,7 +8,7 @@
 set -x
 
 # prevents an instantaneous re-run after pressing the center of the 5way keypad 
-ACTIVE=/tmp/WEATHER_ACTIVE
+WEATHER_ACTIVE=/tmp/WEATHER_ACTIVE
 
 cd "$(dirname "$0")"
 
@@ -64,41 +64,51 @@ launch_onHost () {
 #
 #
 launch_onKindle () {
+	
+	[ -f $WEATHER_ACTIVE ] && {
+		# skip over to prevent an instantaneous re-run
+		exit	
+	}
 
-	# skip over to prevent an instantaneous re-run
-	[ -f $WEATHER_ACTIVE ] && exit
+	###
+	# prepare
+	###
 
 	touch $WEATHER_ACTIVE
 
-	local activeInterface=`lipc-get-prop com.lab126.cmd activeInterface` # if not connected to wifi fail the test
+	local activeInterface=`lipc-get-prop com.lab126.cmd activeInterface` 
 
 	lipc-set-prop -i com.lab126.powerd preventScreenSaver 1
 
 	killall -STOP cvm
+
+	###
+	# run weather
+	###
 
 	./weather.sh &
 
 	wpid=$(pgrep weather.sh)
 
 	waitforkey
-				# if anybody press ENTER the rest will fail...
+
+	###
+	# resume
+	###
 
 	killtree "$wpid" "KILL"
-
-	# resume
 	
 	killall -CONT cvm
-
 	
-	if [ "$activeInterface" == "wifi" ]; then
+	[ "$activeInterface" == "wifi" ] && {
 
 		local cmState=`lipc-get-prop com.lab126.wifid cmState`
 
-		if [ "$cmState" == "NA" ]; then	
+		[ "$cmState" == "NA" ] && {
 			lipc-set-prop com.lab126.wifid enable 1
-		fi	
+		}	
 		
-	fi
+	}
 
 	lipc-set-prop -i com.lab126.powerd preventScreenSaver 0
 
