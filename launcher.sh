@@ -7,6 +7,7 @@
 
 set -x
 
+# prevents an instantaneous re-run after pressing the center of the 5way keypad 
 ACTIVE=/tmp/WEATHER_ACTIVE
 
 cd "$(dirname "$0")"
@@ -64,6 +65,7 @@ launch_onHost () {
 #
 launch_onKindle () {
 
+	# skip over to prevent an instantaneous re-run
 	[ -f $WEATHER_ACTIVE ] && exit
 
 	touch $WEATHER_ACTIVE
@@ -102,6 +104,9 @@ launch_onKindle () {
 
 	# pressing the 'Home' button
 	echo "send 101" > /proc/keypad
+
+	# fade away any pressing of the center of the 5way keypad 
+	sleep 3
 
 	rm $WEATHER_ACTIVE
 
