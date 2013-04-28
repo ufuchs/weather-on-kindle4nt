@@ -16,7 +16,7 @@ Note : All scripts are compatible with the dash and bash shell on your host syst
 
 - Could invoke within a wrapper called 'launcher.sh'
 
-- The download is written in the '/tmp' directory which is a temporary filesystem, living in the memory
+- The download is written in the '/tmp' directory which is a temporary filesystem(32M), living in the memory
 
 ## Installation
 
@@ -24,15 +24,9 @@ Copy this directory onto your Kindle's SD card and rename it to 'weather'.
 
 You need 'Kite' to start 'weather.sh'
 
-Kite is available at:
+Kite comes from here:
 
-  http://www.mobileread.com/forums/showpost.php?p=2373962&postcount=43
-
-And please have a next look at:
-
-  http://www.mobileread.com/forums/showpost.php?p=2205271&postcount=62
-
-(2013-APR-25 At the moment I'm encountering a problem to start 'Kite' with the given runlevel... Be aware!)
+http://www.mobileread.com/forums/showthread.php?t=168270
 
 In the Kite directory lives a shell script called 'Weather'.
 
