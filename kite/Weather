@@ -1,0 +1,5 @@
+#!/bin/sh
+
+/mnt/us/weather/launcher.sh &
+
+
