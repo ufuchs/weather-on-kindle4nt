@@ -19,8 +19,6 @@ WEATHER_FILE_DOWNLOADED="$TMP_DIR/$WEATHER_FILE_NAME"
 
 DIAGS_ACTIVE="$TMP_DIR/diags_active"
 
-SYNCHRONIZE=1
-
 FLIGHTMODE_ON=1
 WLAN_UNAVAILABLE=2
 SERVICE_UNAVAILABLE=8
@@ -31,13 +29,11 @@ WLAN_UNAVAILABLE_PNG="$BASE/img/wlan-unavailable.png"
 SERVICE_UNAVAILABLE_PNG="$BASE/img/service-unavailable.png"
 WEATHER_OUTDATED_PNG="$BASE/img/weather-outdated.png"
 
-export ADJUSTED_UPDATE_INTERVAL=1
-
 . "$BIN_DIR/weatherProperties.sh"
 . "$BIN_DIR/platform.sh"
 
 #
-#
+# @param1 weather file name
 #
 getFileAge () {
 
@@ -61,7 +57,6 @@ isWeatherFileOutDated () {
     ([ $from -le $fileAge ] && [ $fileAge -le $to ]) && echo 0 || echo 1
 
 }
-
 
 #
 # calculate the next possible update interval to be at time at 00:10 o'clock
@@ -197,7 +192,6 @@ printInfoScreen () {
 #
 init () {
 
-
     weatherProperties_init "$BASE/weather.conf"
 
     # Location aus conf-File wandeln
@@ -205,17 +199,11 @@ init () {
 
     mkdir -p "$WEATHER_FILE_DIR" > /dev/null
 
-#    [ "$INDICATORS" -gt 0 ] && {
-#        "$BIN_DIR"/indicators.sh $ADJUSTED_UPDATE_INTERVAL &
-#    }
-
 }
 
 ################################################################################
 # entry
 ################################################################################
-
-#type -t waitBySleep
 
 set -x
 
@@ -251,7 +239,6 @@ while :; do
             } || {
 
                 # at least one pre request failed.
-
                 [ ! -e "$DIAGS_ACTIVE" ] && {
                     STATE=$CHECK_OUTDATED            
                 } || {
@@ -289,14 +276,11 @@ while :; do
         # draw the weather file
         $PRINTSCREEN )
             printScreen "$WEATHER_FILE"
-#            sleep 2
             sec=$(calcUpdateIntervall)
             [ "$INDICATORS" -gt 0 ] && {
                 printBatteryIndicator
-#                printWlanIndicator
                 printAdjustedUpdateInterval "$sec"
             }
-#            sleep 2                # wait to print the screen
             STATE=$WAIT
             ;;
 
@@ -311,6 +295,3 @@ while :; do
     esac
 
 done
-
-
-
