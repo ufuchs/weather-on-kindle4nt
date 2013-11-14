@@ -9,7 +9,7 @@ weather-on-kindle4nt
   (So you can take away your 'weather station' in the pub and show it all your friends.)
 - The download is written in the '/tmp' directory which is a temporary filesystem(32M), living in the memory
 
-__Note__
+__Note__  
 You need to install [kite](https://github.com/ufuchs/kite-kindle4nt) to launch the program.  
 _Before_ that you have to jailbreak the Kindle and to install the [USBNetwork Hacks](http://www.mobileread.com/forums/showthread.php?t=88004)
 Please use the 
